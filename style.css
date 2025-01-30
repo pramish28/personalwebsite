@@ -279,6 +279,7 @@ section{
     position: relative;
     animation: floatImage 4s ease-in-out infinite;
     animation-delay: 3s;
+   
 }
 
 .img-hero img{
@@ -286,6 +287,7 @@ section{
     width: 400px;
     height: auto;
     z-index: 10;
+    
 }
 
 .rotate-text{
