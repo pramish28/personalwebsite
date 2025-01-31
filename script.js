@@ -204,6 +204,9 @@ document.getElementById("contact-form").addEventListener("submit", function (eve
     // Redirect to WhatsApp with pre-filled message
     window.location.href = whatsappUrl;
 
+      // Clear the form data after sending
+      document.getElementById("contact-form").reset();
+
     // Show success message
     document.getElementById("statusMessage").innerText = "Your message is ready to be sent via WhatsApp!";
 });
