@@ -185,3 +185,25 @@ ScrollReveal().reveal('.about-img,.fillter-buttons,.contact-info', { origin: "le
 ScrollReveal().reveal('.about-content,.skills', { origin: "right" });
 ScrollReveal().reveal('.allServices,.portfolio-gallery,.blog-box,footer,.img-hero', { origin: "bottom" });
 
+document.getElementById("contact-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    const firstName = document.querySelector('input[name="firstName"]').value;
+    const lastName = document.querySelector('input[name="lastName"]').value;
+    const email = document.querySelector('input[name="email"]').value;
+    const subject = document.querySelector('input[name="subject"]').value;
+    const message = document.querySelector('textarea[name="message"]').value;
+
+    // Construct the message body
+    const whatsappMessage = `*New Message from ${firstName} ${lastName}*%0A%0AEmail: ${email}%0ASubject: ${subject}%0AMessage: ${message}`;
+
+    // Create the WhatsApp URL
+    const whatsappUrl = `https://wa.me/9779864656856?text=${whatsappMessage}`; // Replace with your WhatsApp number (with country code)
+
+    // Redirect to WhatsApp with pre-filled message
+    window.location.href = whatsappUrl;
+
+    // Show success message
+    document.getElementById("statusMessage").innerText = "Your message is ready to be sent via WhatsApp!";
+});
