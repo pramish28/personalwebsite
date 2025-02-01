@@ -200,7 +200,7 @@ document.getElementById("contact-form").addEventListener("submit", function (eve
 
     if (isMobile) {
         // Include all data in SMS for mobile
-        const phoneNumber = "+1234567890"; // Replace with the actual recipient's number
+        const phoneNumber = "+9779864656856"; // Replace with the actual recipient's number
         const smsBody = `Name: ${firstName} ${lastName}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
         window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(smsBody)}`;
     } else {
