@@ -186,7 +186,7 @@ ScrollReveal().reveal('.about-content,.skills', { origin: "right" });
 ScrollReveal().reveal('.allServices,.portfolio-gallery,.blog-box,footer,.img-hero', { origin: "bottom" });
 
 document.getElementById("contact-form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); // Prevent default form submission
 
     // Get form data
     const firstName = document.querySelector('input[name="firstName"]').value;
@@ -195,20 +195,29 @@ document.getElementById("contact-form").addEventListener("submit", function (eve
     const subject = document.querySelector('input[name="subject"]').value;
     const message = document.querySelector('textarea[name="message"]').value;
 
-    // Construct the email body
-    const gmailBody = `Hello,%0A%0AMy name is ${firstName} ${lastName}.%0A%0AEmail: ${email}%0ASubject: ${subject}%0A%0A${message}%0A%0ARegards,%0A${firstName} ${lastName}`;
+    // Detect if the user is on a mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    // Construct the Gmail Compose URL
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=pramishsharma78@gmail.com&su=${encodeURIComponent(subject)}&body=${gmailBody}`;
-
-    // Redirect to Gmail Compose
-    window.open(gmailUrl, "_blank");
+    if (isMobile) {
+        // Include all data in SMS for mobile
+        const phoneNumber = "+1234567890"; // Replace with the actual recipient's number
+        const smsBody = `Name: ${firstName} ${lastName}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
+        window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(smsBody)}`;
+    } else {
+        // Ensure subject is properly set in Gmail using 'su' instead of 'subject'
+        const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=pramishsharma78@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        window.open(mailtoUrl, "_blank");
+    }
 
     // Show success message
-    document.getElementById("statusMessage").innerText = "Redirecting to Gmail...";
+    document.getElementById("statusMessage").innerText = "Thank you for your message. I will get back to you soon!";
     document.getElementById("statusMessage").style.color = "green";
 
     // Clear the form after submission
     document.getElementById("contact-form").reset();
-});
 
+    // Refresh the page after a short delay
+    setTimeout(() => {
+        location.reload();
+    }, 5000); // Refresh after 5 seconds
+});
