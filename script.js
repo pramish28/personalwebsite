@@ -195,19 +195,20 @@ document.getElementById("contact-form").addEventListener("submit", function (eve
     const subject = document.querySelector('input[name="subject"]').value;
     const message = document.querySelector('textarea[name="message"]').value;
 
-    // Construct the message body
-    const whatsappMessage = `*New Message from ${firstName} ${lastName}*%0A%0AEmail: ${email}%0ASubject: ${subject}%0AMessage: ${message}`;
+    // Construct the email body
+    const gmailBody = `Hello,%0A%0AMy name is ${firstName} ${lastName}.%0A%0AEmail: ${email}%0ASubject: ${subject}%0A%0A${message}%0A%0ARegards,%0A${firstName} ${lastName}`;
 
-    // Create the WhatsApp URL
-    const whatsappUrl = `https://wa.me/9779864656856?text=${whatsappMessage}`; // Replace with your WhatsApp number (with country code)
+    // Construct the Gmail Compose URL
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=pramishsharma78@gmail.com&su=${encodeURIComponent(subject)}&body=${gmailBody}`;
 
-    // Redirect to WhatsApp with pre-filled message
-    window.location.href = whatsappUrl;
+    // Redirect to Gmail Compose
+    window.open(gmailUrl, "_blank");
 
     // Show success message
-    document.getElementById("statusMessage").innerText = "Your message is ready to be sent via WhatsApp!";
-    document.getElementById("statusMessage").style.color = "red";
-      // Clear the form data after sending
-      document.getElementById("contact-form").reset();
+    document.getElementById("statusMessage").innerText = "Redirecting to Gmail...";
+    document.getElementById("statusMessage").style.color = "green";
 
+    // Clear the form after submission
+    document.getElementById("contact-form").reset();
 });
+
